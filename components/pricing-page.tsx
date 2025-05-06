@@ -46,7 +46,10 @@ interface Payment {
   id: string;
   paymentDate: string;
   paymentMethod: string;
-  plan: string;
+  plan: {
+    _id: string;
+    name: string
+  };
   status: string;
   transactionId: string;
   user: string;
@@ -280,6 +283,8 @@ export function PricingPage() {
     setPage(newPage);
   };
 
+  console.log(payments)
+
   return (
     <div className="flex flex-col h-full">
       <PageHeader
@@ -427,7 +432,7 @@ export function PricingPage() {
                             Visit Time
                           </TableHead>
                           <TableHead className="text-center">Amount</TableHead>
-                          <TableHead className="text-center">Type</TableHead>
+                          <TableHead className="text-center">Plan</TableHead>
                           <TableHead className="text-center">Status</TableHead>
                           <TableHead className="text-center">Actions</TableHead>
                         </TableRow>
@@ -460,7 +465,7 @@ export function PricingPage() {
                             </TableCell>
                             <TableCell>{item.formattedAmount}</TableCell>
                             <TableCell className="capitalize">
-                              {item?.plan || "N/A"}
+                              {item?.plan?.name || "N/A"}
                             </TableCell>
                             <TableCell className="max-w-[200px]">
                               <span
